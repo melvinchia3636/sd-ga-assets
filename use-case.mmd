@@ -1,0 +1,44 @@
+flowchart LR
+  CS["内容专员"]
+  CO["合规官"]
+  EO["活动组织者"]
+
+  subgraph SYS["EventSafe 自定义检查表管理"]
+    direction TB
+    UC1(["创建/编辑检查表"])
+    UC2(["配置动态检查表结构"])
+    UC3(["发布与版本管理"])
+    UC4(["跟踪内容请求"])
+    UC5(["查看适用检查表"])
+    UC6(["确认风险条件"])
+    UC7(["审核待验证项"])
+    UC8(["验证并放行"])
+    UC9(["驳回与重提"])
+    UC10(["查看审计日志"])
+    UC11(["导出审计报告"])
+    UC12(["完整性校验"])
+    UC13(["审查并批准检查表"])
+  end
+
+  CS --- UC1
+  CS --- UC2
+  CS --- UC3
+  CS --- UC4
+  EO --- UC5
+  EO --- UC6
+  CO --- UC7
+  CO --- UC8
+  CO --- UC9
+  CO --- UC10
+  CO --- UC11
+  CO --- UC12
+  CO --- UC13
+
+  UC6 -.->|包含| UC10
+  UC8 -.->|包含| UC10
+  UC11 -.->|包含| UC10
+  UC12 -.->|包含| UC10
+  UC13 -.->|记录| UC10
+
+  classDef actor fill:#f7f7f7,stroke:#333,stroke-width:1px
+  class CS,CO,EO actor

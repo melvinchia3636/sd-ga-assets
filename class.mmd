@@ -1,0 +1,114 @@
+classDiagram
+  class Company {
+    +String id
+    +String name
+  }
+  class User {
+    <<abstract>>
+    +String id
+    +String name
+    +String passwordHash
+  }
+  class ContentSpecialist {
+    +String staffId
+  }
+  class ComplianceOfficer {
+    +String staffId
+    +String legalSpecialization
+  }
+  class EventOrganizer {
+    +String companyId
+  }
+  class Event {
+    +String id
+    +String name
+    +String companyId
+    +String jurisdictionId
+    +Date eventDate
+  }
+  class Jurisdiction {
+    +String id
+    +String name
+    +String country
+  }
+  class Checklist {
+    +String id
+    +String title
+    +String status
+    +String version
+  }
+  class Section {
+    +String id
+    +String title
+    +Int order
+  }
+  class ChecklistItem {
+    +String id
+    +String text
+  }
+  class ScoringRule {
+    +String id
+    +Int weight
+    +String condition
+  }
+  class EventChecklistItem {
+    +String id
+    +String status
+    +DateTime acknowledgedAt
+    +DateTime verifiedAt
+  }
+  class CustomRiskItem {
+    +String id
+    +String condition
+  }
+  class Approval {
+    +String id
+    +String actorId
+    +String role
+    +String decision
+    +DateTime timestamp
+    +String reason
+  }
+  class AuditEvent {
+    +String id
+    +String actorId
+    +String action
+    +String beforeValue
+    +String afterValue
+    +DateTime timestamp
+  }
+  class ContentVersion {
+    +String id
+    +String version
+    +String status
+    +DateTime publishedAt
+    +String checksum
+  }
+  class ContentApproval {
+    +String id
+    +String reviewerId
+    +String decision
+    +DateTime timestamp
+    +String reason
+  }
+  User <|-- ContentSpecialist
+  User <|-- ComplianceOfficer
+  User <|-- EventOrganizer
+  Company "1" --> "*" EventOrganizer : employs
+  Company "1" --> "*" Event
+  Jurisdiction "1" --> "*" Event : governs
+  Jurisdiction "1" --> "*" Checklist
+  ContentVersion "1" --> "*" ContentApproval : requires
+  ContentVersion "1" --> "*" Section : contains
+  Section "1" --> "*" ChecklistItem
+  Event "1" --> "*" EventChecklistItem : contains
+  EventChecklistItem "*" --> "1" ChecklistItem : instantiates
+  EventChecklistItem "1" --> "*" Approval : requires
+  Checklist "1" --> "*" ContentVersion : has
+  Checklist "1" --> "0..1" ContentVersion : current
+  User "1" --> "*" Approval : records
+  User "1" --> "*" ContentApproval : reviews
+  User "1" --> "*" AuditEvent : performs
+  Event "1" --> "*" AuditEvent : logs
+  ChecklistItem <|-- CustomRiskItem
+  ChecklistItem "1" --> "0..1" ScoringRule : scored by

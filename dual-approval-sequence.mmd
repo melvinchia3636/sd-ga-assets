@@ -1,0 +1,21 @@
+sequenceDiagram
+  autonumber
+  actor O as 活动组织者
+  participant S as EventSafe 系统
+  actor C as 合规官
+  participant A as 审计日志
+
+  O->>S: 查看自定义风险条件
+  S->>C: 通知待验证项
+  C->>S: 确认法定合规性
+  S->>A: 写入验证记录
+  S->>O: 请求逐项确认
+  O->>S: 确认风险条件
+  S->>A: 写入确认记录
+
+  alt 双方签署齐全
+    S->>S: 标记为已放行
+    S->>A: 记录放行事件
+  else 缺少任一签署
+    S-->>O: 阻止放行并提示缺失签署
+  end

@@ -1,0 +1,33 @@
+flowchart TB
+  subgraph Presentation["展示层"]
+    WEB["Web 前端<br/>角色化界面"]
+  end
+
+  subgraph Application["应用层"]
+    AUTH["身份与权限控制"]
+    AUTHOR["内容创作与版本管理"]
+    CONTENTAPPROVE["内容审批"]
+    APPROVE["双重审批引擎"]
+    AUDIT["审计服务"]
+    EXPORT["审计导出与完整性校验"]
+  end
+
+  subgraph Data["数据层"]
+    CONTENT[("内容与版本库")]
+    AUDITDB[("仅追加审计库")]
+  end
+
+  WEB --> AUTH
+  AUTH --> AUTHOR
+  AUTH --> CONTENTAPPROVE
+  AUTH --> APPROVE
+  AUTHOR --> CONTENT
+  AUTHOR --> CONTENTAPPROVE
+  CONTENTAPPROVE --> CONTENT
+  APPROVE --> CONTENT
+  AUTHOR --> AUDIT
+  CONTENTAPPROVE --> AUDIT
+  APPROVE --> AUDIT
+  AUDIT --> AUDITDB
+  AUDITDB --> EXPORT
+  EXPORT --> WEB
