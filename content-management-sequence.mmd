@@ -1,33 +1,33 @@
 sequenceDiagram
   autonumber
-  actor CS as 内容专员
-  actor CO as 合规官
-  participant S as EventSafe 系统
-  participant DB as 内容与版本库
-  participant A as 审计日志
+  actor CS as Content Specialist
+  actor CO as Compliance Officer
+  participant S as EventSafe System
+  participant DB as Content and Version Repository
+  participant A as Audit Log
 
-  CS->>S: 新建或编辑检查表章节与检查项
-  S->>S: 校验必填字段、评分权重和结构定义
+  CS->>S: Create or edit checklist sections and items
+  S->>S: Validate required fields, scoring weights, and schema
 
-  alt 校验失败
-    S-->>CS: 返回错误清单并保留草稿
-  else 校验通过
-    S->>DB: 保存草稿或修订版本
-    S->>A: 写入内容修订事件
-    CS->>S: 提交发布审批
-    S->>CO: 通知合规官审查
-    CO->>S: 审查内容并批准或驳回
+  alt Validation failed
+    S-->>CS: Return error list and keep draft
+  else Validation passed
+    S->>DB: Save draft or revision
+    S->>A: Write content revision event
+    CS->>S: Submit for publication approval
+    S->>CO: Notify compliance officer to review
+    CO->>S: Review content and approve or reject
 
-    alt 驳回
-      S->>DB: 状态更新为已驳回
-      S->>A: 写入驳回事件
-      S-->>CS: 通知修订并保留驳回原因
-    else 批准
-      S->>DB: 状态更新为已批准
-      S->>A: 写入审批事件
-      CS->>S: 发布并绑定市议会辖区
-      S->>DB: 标记该辖区生效版本
-      S->>A: 写入发布事件
-      S-->>CS: 返回发布结果与版本号
+    alt Rejected
+      S->>DB: Update status to rejected
+      S->>A: Write rejection event
+      S-->>CS: Notify revision and retain rejection reason
+    else Approved
+      S->>DB: Update status to approved
+      S->>A: Write approval event
+      CS->>S: Publish and bind to municipal jurisdiction
+      S->>DB: Mark version effective for the jurisdiction
+      S->>A: Write publication event
+      S-->>CS: Return publication result and version number
     end
   end

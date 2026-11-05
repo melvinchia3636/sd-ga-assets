@@ -1,25 +1,25 @@
 flowchart LR
-  CS["内容专员"]
-  CO["合规官"]
-  EO["活动组织者"]
+  CS["Content Specialist"]
+  CO["Compliance Officer"]
+  EO["Event Organizer"]
 
-  subgraph SYS["EventSafe 自定义检查表管理"]
+  subgraph SYS["EventSafe Custom Checklist Management"]
     direction TB
-    UC1(["创建/编辑检查表"])
-    UC2(["配置动态检查表结构"])
-    UC3(["发布与版本管理"])
-    UC4(["跟踪内容请求"])
-    UC5(["查看适用检查表"])
-    UC6(["确认检查项"])
-    UC7(["审核待验证项"])
-    UC8(["验证并放行"])
-    UC9(["驳回与重提"])
-    UC10(["查看审计日志"])
-    UC11(["导出审计报告"])
-    UC12(["完整性校验"])
-    UC13(["审查并批准检查表"])
-    UC14(["推荐匹配检查表"])
-    UC15(["提交活动申请"])
+    UC1(["Create/Edit Checklist"])
+    UC2(["Configure Dynamic Checklist Schema"])
+    UC3(["Publishing and Version Management"])
+    UC4(["Track Content Requests"])
+    UC5(["View Applicable Checklists"])
+    UC6(["Acknowledge Checklist Items"])
+    UC7(["Review Items Pending Verification"])
+    UC8(["Verify and Release"])
+    UC9(["Reject and Resubmit"])
+    UC10(["View Audit Log"])
+    UC11(["Export Audit Report"])
+    UC12(["Integrity Validation"])
+    UC13(["Review and Approve Checklist"])
+    UC14(["Recommend Matching Checklists"])
+    UC15(["Submit Event Application"])
   end
 
   CS --- UC1
@@ -38,11 +38,11 @@ flowchart LR
   CO --- UC12
   CO --- UC13
 
-  UC6 -.->|包含| UC10
-  UC8 -.->|包含| UC10
-  UC11 -.->|包含| UC10
-  UC12 -.->|包含| UC10
-  UC13 -.->|记录| UC10
+  UC6 -.->|includes| UC10
+  UC8 -.->|includes| UC10
+  UC11 -.->|includes| UC10
+  UC12 -.->|includes| UC10
+  UC13 -.->|records| UC10
 
   classDef actor fill:#f7f7f7,stroke:#333,stroke-width:1px
   class CS,CO,EO actor

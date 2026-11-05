@@ -1,20 +1,20 @@
 flowchart TB
-  subgraph Presentation["展示层"]
-    WEB["Web 前端<br/>角色化界面"]
+  subgraph Presentation["Presentation Layer"]
+    WEB["Web Frontend<br/>Role-based Interface"]
   end
 
-  subgraph Application["应用层"]
-    AUTH["身份与权限控制"]
-    AUTHOR["内容创作与版本管理"]
-    CONTENTAPPROVE["内容审批"]
-    APPROVE["双重审批引擎"]
-    AUDIT["审计服务"]
-    EXPORT["审计导出与完整性校验"]
+  subgraph Application["Application Layer"]
+    AUTH["Identity and Access Control"]
+    AUTHOR["Content Authoring and Version Management"]
+    CONTENTAPPROVE["Content Approval"]
+    APPROVE["Dual Approval Engine"]
+    AUDIT["Audit Service"]
+    EXPORT["Audit Export and Integrity Validation"]
   end
 
-  subgraph Data["数据层"]
-    CONTENT[("内容与版本库")]
-    AUDITDB[("仅追加审计库")]
+  subgraph Data["Data Layer"]
+    CONTENT[("Content and Version Repository")]
+    AUDITDB[("Append-only Audit Store")]
   end
 
   WEB --> AUTH
