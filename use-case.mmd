@@ -18,6 +18,7 @@ flowchart LR
     UC11(["导出审计报告"])
     UC12(["完整性校验"])
     UC13(["审查并批准检查表"])
+    UC14(["自动匹配检查表"])
   end
 
   CS --- UC1
@@ -26,6 +27,7 @@ flowchart LR
   CS --- UC4
   EO --- UC5
   EO --- UC6
+  EO --- UC14
   CO --- UC7
   CO --- UC8
   CO --- UC9
