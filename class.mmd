@@ -24,6 +24,7 @@ classDiagram
     +String name
     +String companyId
     +String jurisdictionId
+    +String eventTypeId
     +Date eventDate
   }
   class Jurisdiction {
@@ -36,6 +37,11 @@ classDiagram
     +String title
     +String status
     +String version
+    +String eventTypeId
+  }
+  class EventType {
+    +String id
+    +String name
   }
   class Section {
     +String id
@@ -97,6 +103,8 @@ classDiagram
   Company "1" --> "*" EventOrganizer : employs
   Company "1" --> "*" Event
   Jurisdiction "1" --> "*" Event : governs
+  EventType "1" --> "*" Event : classifies
+  EventType "1" --> "*" Checklist : classifies
   Jurisdiction "1" --> "*" Checklist
   ContentVersion "1" --> "*" ContentApproval : requires
   ContentVersion "1" --> "*" Section : contains
