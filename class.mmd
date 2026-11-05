@@ -97,6 +97,13 @@ classDiagram
     +DateTime timestamp
     +String reason
   }
+  class ContentRequest {
+    +String id
+    +String planDocumentUrl
+    +String requirements
+    +String status
+    +DateTime submittedAt
+  }
   User <|-- ContentSpecialist
   User <|-- ComplianceOfficer
   User <|-- EventOrganizer
@@ -109,6 +116,9 @@ classDiagram
   ContentVersion "1" --> "*" ContentApproval : requires
   ContentVersion "1" --> "*" Section : contains
   Section "1" --> "*" ChecklistItem
+  Event "1" --> "*" ContentRequest : submits
+  EventOrganizer "1" --> "*" ContentRequest : requests
+  ContentSpecialist "1" --> "*" ContentRequest : handles
   Event "1" --> "*" EventChecklistItem : contains
   EventChecklistItem "*" --> "1" ChecklistItem : instantiates
   EventChecklistItem "1" --> "*" Approval : requires
