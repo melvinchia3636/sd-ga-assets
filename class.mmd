@@ -121,4 +121,4 @@ classDiagram
   ChecklistItem <|-- CustomRiskItem
   ChecklistItem "1" --> "0..1" ScoringRule : scored by
 note for CustomRiskItem "Requires ContentApproval before publication; event-level approval is recorded through EventChecklistItem."
-note for EventChecklistItem "Every event checklist item requires compliance review; custom risk items also require organizer acknowledgement."
+note for EventChecklistItem "Every event checklist item requires organizer acknowledgement and compliance review."
