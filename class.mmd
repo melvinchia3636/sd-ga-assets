@@ -97,10 +97,10 @@ classDiagram
     +DateTime timestamp
     +String reason
   }
-  class ContentRequest {
+  class EventApplication {
     +String id
     +String planDocumentUrl
-    +String requirements
+    +String supportingDocuments
     +String status
     +DateTime submittedAt
   }
@@ -116,9 +116,11 @@ classDiagram
   ContentVersion "1" --> "*" ContentApproval : requires
   ContentVersion "1" --> "*" Section : contains
   Section "1" --> "*" ChecklistItem
-  Event "1" --> "*" ContentRequest : submits
-  EventOrganizer "1" --> "*" ContentRequest : requests
-  ContentSpecialist "1" --> "*" ContentRequest : handles
+  Event "1" --> "*" EventApplication : submits
+  EventOrganizer "1" --> "*" EventApplication : requests
+  ContentSpecialist "1" --> "*" EventApplication : processes
+  EventApplication "1" --> "0..1" Checklist : assigns
+  EventApplication "1" --> "*" CustomRiskItem : assigns
   Event "1" --> "*" EventChecklistItem : contains
   EventChecklistItem "*" --> "1" ChecklistItem : instantiates
   EventChecklistItem "1" --> "*" Approval : requires
