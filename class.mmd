@@ -120,3 +120,4 @@ classDiagram
   Event "1" --> "*" AuditEvent : logs
   ChecklistItem <|-- CustomRiskItem
   ChecklistItem "1" --> "0..1" ScoringRule : scored by
+note for CustomRiskItem "Requires ContentApproval before publication; event-level approval is recorded through EventChecklistItem."
