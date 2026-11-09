@@ -1,0 +1,14 @@
+flowchart LR
+  A[Submit event application, plan and documents] --> B[Content team reviews application]
+  B --> C[Assign checklist and custom risk items]
+  C --> D[Organizer confirms every item]
+  D --> E[Compliance reviews every item]
+  E --> F{Compliant?}
+  F -- No --> G[Reject with recorded reason]
+  G --> C
+  F -- Yes --> H[Verify items]
+  H --> I{Both signatures complete?}
+  I -- No --> J[Block clearance]
+  J --> D
+  I -- Yes --> K[Clear event for release]
+  K --> L[Append audit record]

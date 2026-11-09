@@ -1,0 +1,8 @@
+flowchart LR
+  E[Compliance reviews every item] --> F{Compliant?}
+  F -- No --> G[Reject with recorded reason]
+  F -- Yes --> H[Verify items]
+  H --> I{Both signatures complete?}
+  I -- No --> J[Block clearance]
+  I -- Yes --> K[Clear event for release]
+  K --> L[Append audit record]
